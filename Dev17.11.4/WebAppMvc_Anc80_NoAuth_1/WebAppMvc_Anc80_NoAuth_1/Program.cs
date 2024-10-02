@@ -1,4 +1,10 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using WebAppMvc_Anc80_NoAuth_1.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<MoviesContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MoviesContext") ?? throw new InvalidOperationException("Connection string 'MoviesContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
